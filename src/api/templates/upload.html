@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form action = "http://localhost:6060/upload_form" method = "POST" enctype = "multipart/form-data">
+    Introduce Year_Birth <input name="Year_Birth_text"><br>
+    Education level<SELECT name="Ed_level_resp">
+        {% for c in EducationList %}
+            <OPTION value={{c}}>{{c}}</option>
+        {% endfor %}
+        </SELECT><br>
+    Marital_status level<SELECT name="Marital_resp">
+        {% for d in MaritalList %}
+            <OPTION value={{d}}>{{d}}</option>
+        {% endfor %}
+        </SELECT><br>
+    Introduce Income <input name="Income_text"><br>
+    Introduce total amount spent in wines <input name="wines_text"><br>
+    Introduce total amount spent in Fruits <input name="Fruits_text"><br>
+    Introduce total amount spent in Meat <input name="Meat_text"><br>
+    Introduce total amount spent in Fish <input name="Fish_text"><br>
+    Introduce total amount spent in Sweets <input name="Sweets_text"><br>
+    Introduce total amount spent in DiscountPurchases <input name="DiscountPurchases_text"><br>
+    Introduce total amount spent in WebPurchases <input name="WebPurchases_text"><br>
+    Introduce total amount spent in SalesAgentPurchases <input name="SalesAgentPurchases_text"><br>
+    Introduce total amount spent in StorePurchases <input name="StorePurchases_text"><br>
+    Introduce total amount spent in WebVisitsMonth <input name="WebVisitsMonth_text"><br>
+    Introduce total amount spent in Campaign4 <input name="Campaign4_text"><br>
+    Introduce total amount spent in Campaign5 <input name="Campaign5_text"><br>
+    Introduce total KidsHome <input name="KidsHome_text"><br>
+    <input type = "submit"/>
+</form>
+
+
+
+<!--
+<form method="POST">
+    <input name="text">
+    <input type="submit">
+</form>
+
+<form method=post enctype=multipart/form-data>
+    <input type=file name=file>
+    <input type=submit value=Upload>
+</form>
+
+
+Predictions are: {{ shape }}
+-->
+</body>
+</html>
