@@ -13,8 +13,8 @@ from sklearn.linear_model import LogisticRegression
 
 def cambios_input_datos(df):
     """leemos csv, get dummies etc. y hacer la prediccion"""
-    loaded_model = load(open("C:\\Data_Science_Bootcamp_Kapil\\PythonCurso\\alumno\\MarketingAnalytics_ML_Project\\src\\finalized_model.sav", "rb"))
-    prediction = loaded_model.predict(df)
+    loaded_model2 = load(open(root_path +"\\models\\best_model.sav", "rb"))
+    prediction = loaded_model2.predict(df)
     prediction_df = pd.DataFrame(prediction)
     prediction_df = prediction_df.to_json()
     return prediction_df #prediction

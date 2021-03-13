@@ -13,24 +13,18 @@ app = Flask(__name__)
 
 @app.route("/")
 def home():
-    #cityList= ["Hola", "Adios", "1"]
     EducationList = ["2n_Cycle","Basic","Graduation","Master","PhD"]
     MaritalList = ['Divorced', 'Single', 'Married', 'Together', 'Widow']
     return render_template("upload.html", EducationList=EducationList,MaritalList=MaritalList) 
     #Voy a upload.html y cojo la respuesta, al pinchar en submit, me lleva directamente a /upload_form ya 
     #que lo pone en html
 
-with open('C:\\Data_Science_Bootcamp_Kapil\\PythonCurso\\alumno\\MarketingAnalytics_ML_Project\\src\\dicc_Education.json') as f:
-  data_Educ = json.load(f)
-#data_modi_Education = json.loads(data)
 
-with open('C:\\Data_Science_Bootcamp_Kapil\\PythonCurso\\alumno\\MarketingAnalytics_ML_Project\\src\\dicc_Marital.json') as f1:
+with open(root_path + "\\data\\diction_Education_1.json") as f: #Intentando que funcione lo anterior
+    data_Educ = json.load(f)
+with open(root_path + "\\data\\dicc_Marital_1.json") as f1:
   data_Marital = json.load(f1)
-#data_modi_Marital = json.loads(data1)
 
-
-l = {"Hola": [1,0,0], "Adios": [0,1,0]}
-l["Hola"]
 
 
 @app.route("/upload_form", methods = ['POST', 'GET'])
@@ -64,18 +58,11 @@ def upload_form():
         int(Campaign4),int(Campaign5),int(KidsHome)]
 
         array_final = np.concatenate((array_creado, array_Education, array_Marital), axis=None)
-        print("array_final ====== ",array_final.shape)
-        print("array_final ====== ",array_final)
         X = array_final.reshape(1,-1)
-        print("X ====== ",X)
-        print("X ====== ",X.shape)
         prediccionnn = cambios_input_datos(X)
         print("prediccionnnn == ",prediccionnn)
-        # datos =[texto_Year,texto]
-        # df = pd.DataFrame(datos, columns = ['Name', 'Age']) 
-        # cambios_input_datos(df)
 
-    return str(prediccionnn)#str(array_Marital)  # "Has seleccionado el texto " + array_elegido
+    return "prediction = " + str(prediccionnn)
 
 
 @app.route("/token_id", methods=['GET']) #Habria que poner despues de /token_id?password=K78700616
@@ -87,8 +74,6 @@ def token_id():
         return "Go to: http://localhost:6060/upload"#json_b_group #open_json(path_json) #Devolver Json con la predicción
     else:
         return "CONTRASEÑA INCORRECTA"
-
-
 
 """
 @app.route('/upload', methods=['GET', 'POST']) #Me permite introducir archivos json o csv (en web)
