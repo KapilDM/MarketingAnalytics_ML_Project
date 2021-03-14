@@ -75,19 +75,6 @@ def token_id():
     else:
         return "CONTRASEÑA INCORRECTA"
 
-"""
-@app.route('/upload', methods=['GET', 'POST']) #Me permite introducir archivos json o csv (en web)
-def upload():
-    if request.method == 'POST':
-        try:
-            df = pd.read_csv(request.files.get('file'))
-            df.to_csv('output.csv', index=False, header=None)
-        except:
-            df = pd.read_json(request.files.get('file'))
-            df.to_json('output_json.csv', index=False, header=None)
-        return render_template('upload.html', shape=cambios_input_datos(df)) 
-    return render_template('upload.html')
-"""
 
 if __name__ == "__main__":
     app.run(debug=True,host="0.0.0.0",port=6060) 
