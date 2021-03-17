@@ -16,11 +16,10 @@ def home():
     EducationList = ["2n_Cycle","Basic","Graduation","Master","PhD"]
     MaritalList = ['Divorced', 'Single', 'Married', 'Together', 'Widow']
     return render_template("upload.html", EducationList=EducationList,MaritalList=MaritalList) 
-    #Voy a upload.html y cojo la respuesta, al pinchar en submit, me lleva directamente a /upload_form ya 
-    #que lo pone en html
+    
 
 
-with open(root_path + "\\data\\diction_Education_1.json") as f: #Intentando que funcione lo anterior
+with open(root_path + "\\data\\diction_Education_1.json") as f: 
     data_Educ = json.load(f)
 with open(root_path + "\\data\\dicc_Marital_1.json") as f1:
   data_Marital = json.load(f1)
@@ -33,8 +32,8 @@ def upload_form():
     if request.method == 'POST':
         Year = request.form['Year_Birth_text']
 
-        x = request.form['Ed_level_resp'] #x es el valor que yo le meto en el desplegable (str)
-        array_Education = np.array(data_Educ[x]) # accedo al json de x (opcion elegida por mi) = [1, 0, 0, 0, 0]
+        x = request.form['Ed_level_resp'] 
+        array_Education = np.array(data_Educ[x]) 
         x1 = request.form['Marital_resp']
         array_Marital = np.array(data_Marital[x1])
 
@@ -49,29 +48,34 @@ def upload_form():
         SalesAgentPurchases = request.form['SalesAgentPurchases_text']
         StorePurchases = request.form['StorePurchases_text']
         WebVisitsMonth = request.form['WebVisitsMonth_text']
-        Campaign4 = request.form['Campaign4_text']
-        Campaign5 = request.form['Campaign5_text']
+        Campaign1 = request.form['Campaign1_text']
+        Campaign2 = request.form['Campaign2_text']
         KidsHome = request.form['KidsHome_text']
 
         array_creado = [int(Year),float(income),int(wines),int(fruits),int(meat),int(Fish),int(Sweets),
         int(DiscountPurchases),int(WebPurchases),int(SalesAgentPurchases),int(StorePurchases),int(WebVisitsMonth),
-        int(Campaign4),int(Campaign5),int(KidsHome)]
+        int(Campaign1),int(Campaign2),int(KidsHome)]
 
         array_final = np.concatenate((array_creado, array_Education, array_Marital), axis=None)
         X = array_final.reshape(1,-1)
-        prediccionnn = cambios_input_datos(X)
-        print("prediccionnnn == ",prediccionnn)
+        prediccion = cambios_input_datos(X)
+        print("tipo de prediccion = ", type(prediccion[0]))
+        condicion = prediccion[0]
+        if condicion == 0:
+            return "Prediccion = " + str(condicion) + "  ---------  El modelo a predicho que el cliente NO va a aceptar la campaña 3"
+        else:
+            return "Prediccion = " + str(condicion) + "  ---------  El modelo a predicho que el cliente SI va a aceptar la campaña 3"
+                
+    
 
-    return "prediction = " + str(prediccionnn)
 
-
-@app.route("/token_id", methods=['GET']) #Habria que poner despues de /token_id?password=K78700616
+@app.route("/token_id", methods=['GET']) 
 def token_id():
     S = "K78700616"
     contrasenia = request.args["password"] 
     if (contrasenia == S):
         #json_b_group = n_d_averages_json()
-        return "Go to: http://localhost:6060/upload"#json_b_group #open_json(path_json) #Devolver Json con la predicción
+        return "Go to: http://localhost:6060/upload"
     else:
         return "CONTRASEÑA INCORRECTA"
 

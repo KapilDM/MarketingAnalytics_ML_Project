@@ -102,7 +102,7 @@ def ways_purchase(df,cols):
     #Grafica
     colors = ["#3F0245","#7A2D81", "#A56AAB", "#C197C6", "#E9D9EB"]
     plt.pie(df_purchases["TotalPurchase"], labels= df_purchases["Purchase_Type"],colors=colors, autopct="%.1f %%")  
-    plt.title("Time needed for each project step")
+    plt.title("Purchase method")
     plt.savefig(root_path + "\\reports\\ways_purchases.png")
     plt.show()
 
